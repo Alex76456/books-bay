@@ -1,8 +1,24 @@
-// import { Counter } from "./features/counter/Counter";
+import React, { useEffect } from "react";
 import "./App.css";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { fetchUsers } from "./store/reducers/ActionCreators";
 
 function App() {
-  return <div className="App"></div>;
+  const dispatch = useAppDispatch();
+  const { users, isLoading, error } = useAppSelector(
+    (state) => state.userReducer
+  );
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+  return (
+    <div className="App">
+      {isLoading && <h1>Идет загрузка...</h1>}
+      {error && <h1>{error}</h1>}
+    </div>
+  );
 }
 
 export default App;
