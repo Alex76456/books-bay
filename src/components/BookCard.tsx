@@ -18,7 +18,7 @@ const BookCard = ({ _id }: { _id: string }) => {
     <div className="shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] gap-2 m-2 w-[300px]  flex flex-col items-center   rounded-xl">
       <div className="bc-light w-full h-[250px] flex justify-center items-center rounded-t-xl">
         <NavigateWrapper path={`../book/${_id}`}>
-          <img src={currentBook.cover} width={150} height="auto" />
+          <img src={currentBook.cover} width={150} height="auto" alt="book" />
         </NavigateWrapper>
       </div>
       <NavigateWrapper path={`book/${_id}`}>

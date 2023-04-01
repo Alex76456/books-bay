@@ -9,11 +9,8 @@ const favsValue = localStorage.getItem("favs")
   : [];
 
 const initialState: StateType = {
-  // isLoading: true,
-  // books: null,
   cart: cartValue,
   favourites: favsValue,
-  // errors: null,
 };
 
 export const BooksSlice = createSlice({
