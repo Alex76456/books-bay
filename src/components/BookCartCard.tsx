@@ -1,18 +1,16 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import useCart from "../hooks/useCart";
 import useFavourites from "../hooks/useFavourites";
-import { getBookById } from "../store/books/selectors";
 import NavigateWrapper from "./NavigateWrapper";
 import { booksAPI } from "../services/api.service";
 
 const BookCartCard = ({ _id }: { _id: string }) => {
-  // const currentBook = useSelector(getBookById(_id));
-
-  const { data } = booksAPI.useFetchAllBooksQuery("");
-  const books = data?.books;
-  const currentBook = books?.find((b: { _id: string }) => b._id === _id);
+  const { currentBook } = booksAPI.useFetchAllBooksQuery("", {
+    selectFromResult: ({ data }) => ({
+      currentBook: data?.books.find((book) => book._id === _id),
+    }),
+  });
 
   const { toggleCartButton } = useCart(_id);
   const { isFavourite, toggleFavouritesButton } = useFavourites(_id);

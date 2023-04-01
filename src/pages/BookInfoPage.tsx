@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { getBookById } from "../store/books/selectors";
 import useFavourites from "../hooks/useFavourites";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import useCart from "../hooks/useCart";
@@ -11,11 +9,12 @@ import { booksAPI } from "../services/api.service";
 const BookInfoPage = () => {
   const params = useParams();
   const id = params?.id ? params?.id : "";
-  // const currentBook = useSelector(getBookById(id));
 
-  const { data } = booksAPI.useFetchAllBooksQuery("");
-  const books = data?.books;
-  const currentBook = books?.find((b: { _id: string }) => b._id === id);
+  const { currentBook } = booksAPI.useFetchAllBooksQuery("", {
+    selectFromResult: ({ data }) => ({
+      currentBook: data?.books.find((book) => book._id === id),
+    }),
+  });
 
   const { toggleFavouritesButton, isFavourite } = useFavourites(id);
   const { toggleCartButton, isInCart } = useCart(id);

@@ -1,19 +1,20 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { BooksSlice } from "../store/books/reducer";
-import { getBookById, getCart } from "../store/books/selectors";
+import { getCart } from "../store/books/selectors";
 import { toggleLocalStorage } from "../utils/toggleLocalStorage";
 import { booksAPI } from "../services/api.service";
+import { useAppDispatch, useAppSelector } from "./redux";
 
 const useCart = (_id: string) => {
-  const cart = useSelector(getCart());
-  // const currentBook = useSelector(getBookById(_id));
+  const cart = useAppSelector(getCart());
 
-  const { data } = booksAPI.useFetchAllBooksQuery("");
-  const books = data?.books;
-  const currentBook = books?.find((b: { _id: string }) => b._id === _id);
+  const { currentBook } = booksAPI.useFetchAllBooksQuery("", {
+    selectFromResult: ({ data }) => ({
+      currentBook: data?.books.find((book) => book._id === _id),
+    }),
+  });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [isInCart, setIsInCart] = React.useState(cart.includes(_id));
 
   const toggleCartButton = () => {

@@ -1,19 +1,15 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import BookCartCard from "../components/BookCartCard";
-import { getAllBooks, getCart } from "../store/books/selectors";
+import { getCart } from "../store/books/selectors";
 import { booksAPI } from "../services/api.service";
+import { useAppSelector } from "../hooks/redux";
 
 const CartPage = () => {
-  // const books = useSelector(getAllBooks());
-
   const { data } = booksAPI.useFetchAllBooksQuery("");
   const books = data?.books;
 
-  const cart = useSelector(getCart());
+  const cart = useAppSelector(getCart());
   const [isVisible, setIsVisible] = React.useState(false);
-
-  // const { books, cart } = booksAPI.useFetchAllBooksQuery();
 
   return (
     <div>

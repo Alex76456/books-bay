@@ -1,21 +1,22 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { BooksSlice } from "../store/books/reducer";
-import { getBookById, getFavouites } from "../store/books/selectors";
+import { getFavouites } from "../store/books/selectors";
 import { toggleLocalStorage } from "../utils/toggleLocalStorage";
 import { booksAPI } from "../services/api.service";
+import { useAppDispatch, useAppSelector } from "./redux";
 
 const useFavourites = (_id: string) => {
-  const favourites = useSelector(getFavouites());
-  const dispatch = useDispatch();
+  const favourites = useAppSelector(getFavouites());
+  const dispatch = useAppDispatch();
   const [isFavourite, setIsFavourite] = React.useState(
     favourites.includes(_id)
   );
-  // const currentBook = useSelector(getBookById(_id));
 
-  const { data } = booksAPI.useFetchAllBooksQuery("");
-  const books = data?.books;
-  const currentBook = books?.find((b: { _id: string }) => b._id === _id);
+  const { currentBook } = booksAPI.useFetchAllBooksQuery("", {
+    selectFromResult: ({ data }) => ({
+      currentBook: data?.books.find((book) => book._id === _id),
+    }),
+  });
 
   const toggleFavouritesButton = () => {
     if (currentBook) {

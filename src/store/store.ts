@@ -1,11 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-// import userReducer from "./reducers/UserSlice";
-// import { postAPI } from "../services/PostService";
 import { BooksSlice } from "./books/reducer";
 import { booksAPI } from "../services/api.service";
 
 const rootReducer = combineReducers({
-  // userReducer,
   booksData: BooksSlice.reducer,
   [booksAPI.reducerPath]: booksAPI.reducer,
 });

@@ -4,14 +4,11 @@ import CartIcon from "../assets/icons/CartIcon";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import NavigateWrapper from "./NavigateWrapper";
 import { getCart, getFavouites } from "../store/books/selectors";
-import { useSelector } from "react-redux";
-import { booksAPI } from "../services/api.service";
+import { useAppSelector } from "../hooks/redux";
 
 const Menu = () => {
-  const favourites = useSelector(getFavouites());
-  const cart = useSelector(getCart());
-
-  // const { favourites, cart } = booksAPI.useFetchAllBooksQuery("");
+  const favourites = useAppSelector(getFavouites());
+  const cart = useAppSelector(getCart());
 
   return (
     <div className="flex justify-between p-5 mb-2 items-center bg-sky-300">

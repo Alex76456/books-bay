@@ -1,17 +1,15 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
 import BookCard from "../components/BookCard";
 import CardWrapper from "../components/CardWrapper";
-import { getAllBooks, getFavouites } from "../store/books/selectors";
+import { getFavouites } from "../store/books/selectors";
 import { booksAPI } from "../services/api.service";
+import { useAppSelector } from "../hooks/redux";
 
 const FavouritesPage = () => {
-  // const books = useSelector(getAllBooks());
-
   const { data } = booksAPI.useFetchAllBooksQuery("");
   const books = data?.books;
 
-  const favourites = useSelector(getFavouites());
+  const favourites = useAppSelector(getFavouites());
 
   return (
     <CardWrapper>
