@@ -1,17 +1,20 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/UserSlice";
-import { postAPI } from "../services/PostService";
+// import userReducer from "./reducers/UserSlice";
+// import { postAPI } from "../services/PostService";
+import { BooksSlice } from "./books/reducer";
+import { booksAPI } from "../services/api.service";
 
 const rootReducer = combineReducers({
-  userReducer,
-  [postAPI.reducerPath]: postAPI.reducer,
+  // userReducer,
+  booksData: BooksSlice.reducer,
+  [booksAPI.reducerPath]: booksAPI.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(postAPI.middleware),
+      getDefaultMiddleware().concat(booksAPI.middleware),
   });
 };
 
