@@ -10,7 +10,7 @@ const NavigateWrapper = ({
 }) => {
   const navigate = useNavigate();
 
-  console.log("path", path);
+  // console.log("path", path);
   return (
     <div
       className="cursor-pointer transition ease-in-out duration-300 hover:scale-105"
