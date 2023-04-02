@@ -6,9 +6,9 @@ import NavigateWrapper from "./NavigateWrapper";
 import { booksAPI } from "../services/api.service";
 
 const BookCartCard = ({ _id }: { _id: string }) => {
-  const { currentBook } = booksAPI.useFetchAllBooksQuery("", {
+  const { currentBook } = booksAPI.useFetchAllBooksQuery(undefined, {
     selectFromResult: ({ data }) => ({
-      currentBook: data?.books.find((book) => book._id === _id),
+      currentBook: data?.find((book) => book._id === _id),
     }),
   });
 
@@ -20,23 +20,33 @@ const BookCartCard = ({ _id }: { _id: string }) => {
       <div className="flex justify-between m-3">
         <NavigateWrapper path={`../book/${_id}`}>
           <div className="flex gap-2">
-            <img src={currentBook?.cover} width={100} />
+            {/* <img src={currentBook?.cover} width={100} /> */}
+
+            <img
+              src={
+                currentBook?.cover
+                  ? `https://covers.openlibrary.org/b/id/${currentBook.cover}-M.jpg`
+                  : `https://missefficiency.nl/contents/media/l_naslagwerk_20171107144603.jpg`
+              }
+              width={100}
+              alt="book"
+            />
             <div className="flex flex-col">
               <span>{currentBook?.author}</span>
               <span>{currentBook?.title}</span>
-              <span>{currentBook?.price}</span>
+              {/* <span>{currentBook?.price}</span> */}
             </div>
           </div>
         </NavigateWrapper>
         <div className="flex flex-col justify-between">
           <span
             className="text-[25px] text-center hover:bg-gray-100 p-1 rounded-full cursor-pointer"
-            onClick={() => toggleCartButton()}
+            onClick={toggleCartButton}
           >
             &#10006;
           </span>
           <div
-            onClick={() => toggleFavouritesButton()}
+            onClick={toggleFavouritesButton}
             className="hover:bg-gray-100 p-1 rounded-full cursor-pointer"
           >
             <FavouriteIcon color={isFavourite ? "#ffc0cb" : "#452400"} />

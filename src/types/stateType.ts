@@ -1,4 +1,6 @@
+import { BookCardType } from "./bookCardType";
+
 export type StateType = {
-  cart: string[];
-  favourites: string[];
+  cart: BookCardType[];
+  favourites: BookCardType[];
 };

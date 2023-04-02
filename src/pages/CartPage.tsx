@@ -1,13 +1,9 @@
 import * as React from "react";
 import BookCartCard from "../components/BookCartCard";
 import { getCart } from "../store/books/selectors";
-import { booksAPI } from "../services/api.service";
 import { useAppSelector } from "../hooks/redux";
 
 const CartPage = () => {
-  const { data } = booksAPI.useFetchAllBooksQuery("");
-  const books = data?.books;
-
   const cart = useAppSelector(getCart());
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -15,10 +11,8 @@ const CartPage = () => {
     <div>
       {cart.length ? (
         <div className="flex flex-col justify-between h-full">
-          {books?.map((b) => {
-            if (cart.includes(b._id)) {
-              return <BookCartCard _id={b._id} key={b._id} />;
-            }
+          {cart.map((b) => {
+            return <BookCartCard _id={b._id} key={b._id} />;
           })}
           <div
             className="ml-auto flex flex-col"

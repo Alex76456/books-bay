@@ -1,21 +1,36 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { BookCardType } from "../types/bookCardType";
 
+export type BookCardFromResponseType = {
+  key: string;
+  author_name: string[];
+  cover_i: number;
+  title: string;
+};
+
 type DataType = {
-  books: BookCardType[];
+  docs: BookCardFromResponseType[];
 };
 
 export const booksAPI = createApi({
   reducerPath: "booksAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      "https://bookstore-test-7339f-default-rtdb.asia-southeast1.firebasedatabase.app/",
+    baseUrl: "https://openlibrary.org/",
   }),
   endpoints: (build) => ({
-    fetchAllBooks: build.query<DataType, any>({
+    fetchAllBooks: build.query<BookCardType[], undefined>({
       query: () => ({
-        url: `.json`,
+        url: `search.json?q=${"ring"}`,
       }),
+
+      transformResponse: (response: DataType, meta, arg) => {
+        return response?.docs.map((el) => ({
+          _id: el.key.replace(/[/]/g, ""),
+          author: el.author_name?.[0] || "",
+          cover: el.cover_i,
+          title: el.title,
+        }));
+      },
     }),
   }),
 });
