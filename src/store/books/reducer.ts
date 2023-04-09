@@ -13,6 +13,7 @@ const favsValue = localStorage.getItem(localStorageKeys.FAVOURITES)
 const initialState: StateType = {
   cart: cartValue,
   favourites: favsValue,
+  searchTerm: "",
 };
 
 export const BooksSlice = createSlice({
@@ -25,6 +26,10 @@ export const BooksSlice = createSlice({
 
     updateFavourites: (state, action: PayloadAction<BookCardType[]>) => {
       state.favourites = action.payload;
+    },
+
+    updateSearchTerm: (state, action: PayloadAction<string>) => {
+      state.searchTerm = action.payload;
     },
   },
 });

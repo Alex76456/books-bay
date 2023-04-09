@@ -5,20 +5,27 @@ import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import useCart from "../hooks/useCart";
 import CartIcon from "../assets/icons/CartIcon";
 import { booksAPI } from "../services/api.service";
+import { useAppSelector } from "../hooks/redux";
+import { getCurSearchTerm } from "../store/books/selectors";
 
 const BookInfoPage = () => {
   const params = useParams();
 
+  const searchTerm = useAppSelector(getCurSearchTerm());
+
   const id = params?.id ? params?.id : "";
 
-  const { currentBook } = booksAPI.useFetchAllBooksQuery(undefined, {
+  const { currentBook } = booksAPI.useFetchAllBooksQuery(searchTerm, {
     selectFromResult: ({ data }) => ({
       currentBook: data?.find((book) => book._id === id),
     }),
   });
 
-  const { toggleFavouritesButton, isFavourite } = useFavourites(id);
-  const { toggleCartButton, isInCart } = useCart(id);
+  const { toggleFavouritesButton, isFavourite } = useFavourites(
+    id,
+    currentBook
+  );
+  const { toggleCartButton, isInCart } = useCart(id, currentBook);
 
   return (
     <>

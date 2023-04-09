@@ -12,7 +12,7 @@ const CartPage = () => {
       {cart.length ? (
         <div className="flex flex-col justify-between h-full">
           {cart.map((b) => {
-            return <BookCartCard _id={b._id} key={b._id} />;
+            return <BookCartCard _id={b._id} key={b._id} book={b} />;
           })}
           <div
             className="ml-auto flex flex-col"

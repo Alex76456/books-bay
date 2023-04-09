@@ -18,3 +18,6 @@ import { RootState } from "./../store";
 export const getFavouites = () => (state: RootState) =>
   state.booksData.favourites;
 export const getCart = () => (state: RootState) => state.booksData.cart;
+
+export const getCurSearchTerm = () => (state: RootState) =>
+  state.booksData.searchTerm;

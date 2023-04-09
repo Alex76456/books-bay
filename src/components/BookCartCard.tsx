@@ -4,16 +4,11 @@ import useCart from "../hooks/useCart";
 import useFavourites from "../hooks/useFavourites";
 import NavigateWrapper from "./NavigateWrapper";
 import { booksAPI } from "../services/api.service";
+import { BookCardType } from "../types/bookCardType";
 
-const BookCartCard = ({ _id }: { _id: string }) => {
-  const { currentBook } = booksAPI.useFetchAllBooksQuery(undefined, {
-    selectFromResult: ({ data }) => ({
-      currentBook: data?.find((book) => book._id === _id),
-    }),
-  });
-
-  const { toggleCartButton } = useCart(_id);
-  const { isFavourite, toggleFavouritesButton } = useFavourites(_id);
+const BookCartCard = ({ _id, book }: { _id: string; book: BookCardType }) => {
+  const { toggleCartButton } = useCart(_id, book);
+  const { isFavourite, toggleFavouritesButton } = useFavourites(_id, book);
 
   return (
     <>
@@ -24,16 +19,16 @@ const BookCartCard = ({ _id }: { _id: string }) => {
 
             <img
               src={
-                currentBook?.cover
-                  ? `https://covers.openlibrary.org/b/id/${currentBook.cover}-M.jpg`
+                book?.cover
+                  ? `https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`
                   : `https://missefficiency.nl/contents/media/l_naslagwerk_20171107144603.jpg`
               }
               width={100}
               alt="book"
             />
             <div className="flex flex-col">
-              <span>{currentBook?.author}</span>
-              <span>{currentBook?.title}</span>
+              <span>{book?.author}</span>
+              <span>{book?.title}</span>
               {/* <span>{currentBook?.price}</span> */}
             </div>
           </div>

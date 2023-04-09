@@ -18,9 +18,9 @@ export const booksAPI = createApi({
     baseUrl: "https://openlibrary.org/",
   }),
   endpoints: (build) => ({
-    fetchAllBooks: build.query<BookCardType[], undefined>({
-      query: () => ({
-        url: `search.json?q=${"ring"}`,
+    fetchAllBooks: build.query<BookCardType[], string | undefined>({
+      query: (str) => ({
+        url: `search.json?q=${str}`,
       }),
 
       transformResponse: (response: DataType, meta, arg) => {

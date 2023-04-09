@@ -9,7 +9,7 @@ const FavouritesPage = () => {
   return (
     <CardWrapper>
       {favourites.length ? (
-        favourites.map((b) => <BookCard _id={b._id} key={b._id} />)
+        favourites.map((b) => <BookCard _id={b._id} key={b._id} book={b} />)
       ) : (
         <span>Добавтье любимые книги в избранное!</span>
       )}

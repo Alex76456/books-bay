@@ -4,18 +4,15 @@ import useCart from "../hooks/useCart";
 import useFavourites from "../hooks/useFavourites";
 import NavigateWrapper from "./NavigateWrapper";
 import { booksAPI } from "../services/api.service";
+import { useAppSelector } from "../hooks/redux";
+import { RootState } from "../store/store";
+import { BookCardType } from "../types/bookCardType";
 
-const BookCard = ({ _id }: { _id: string }) => {
-  const { currentBook } = booksAPI.useFetchAllBooksQuery(undefined, {
-    selectFromResult: ({ data }) => ({
-      currentBook: data?.find((book) => book._id === _id),
-    }),
-  });
+const BookCard = ({ _id, book }: { _id: string; book: BookCardType }) => {
+  const { toggleCartButton, isInCart } = useCart(_id, book);
+  const { isFavourite, toggleFavouritesButton } = useFavourites(_id, book);
 
-  const { toggleCartButton, isInCart } = useCart(_id);
-  const { isFavourite, toggleFavouritesButton } = useFavourites(_id);
-
-  return currentBook ? (
+  return book ? (
     <NavigateWrapper path={`../book/${_id}`}>
       <div className="shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] gap-2 m-2 w-[300px]  flex flex-col items-center   rounded-xl">
         <div className="bc-light w-full h-[250px] flex justify-center items-center rounded-t-xl">
@@ -23,8 +20,8 @@ const BookCard = ({ _id }: { _id: string }) => {
 
           <img
             src={
-              currentBook.cover
-                ? `https://covers.openlibrary.org/b/id/${currentBook.cover}-M.jpg`
+              book.cover
+                ? `https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`
                 : `https://missefficiency.nl/contents/media/l_naslagwerk_20171107144603.jpg`
             }
             width={150}
@@ -33,8 +30,8 @@ const BookCard = ({ _id }: { _id: string }) => {
           />
         </div>
         <div className="flex flex-col word-break ">
-          <span className="color-brown">{currentBook.author}</span>
-          <span className="color-dark font-semibold">{currentBook.title}</span>
+          <span className="color-brown">{book.author}</span>
+          <span className="color-dark font-semibold">{book.title}</span>
         </div>
         <div className="max-w-[250px] flex justify-between w-full items-center">
           {/* <span>{currentBook.price}</span> */}
