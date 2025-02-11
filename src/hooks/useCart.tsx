@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, MouseEvent } from "react";
 import { BooksSlice } from "../store/books/reducer";
 import { getCart } from "../store/books/selectors";
 import { toggleCardsLocalStorage } from "../utils/toggleCardsLocalStorage";
@@ -11,11 +11,9 @@ const useCart = (_id: string, book: BookCardType | undefined) => {
   const cart = useAppSelector(getCart());
 
   const dispatch = useAppDispatch();
-  const [isInCart, setIsInCart] = React.useState(
-    cart.some((el) => el._id === _id)
-  );
+  const [isInCart, setIsInCart] = useState(cart.some((el) => el._id === _id));
 
-  const toggleCartButton = (e: React.MouseEvent) => {
+  const toggleCartButton = (e: MouseEvent) => {
     e.stopPropagation();
 
     if (book) {

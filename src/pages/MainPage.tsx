@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, ChangeEvent } from "react";
 
 import SearchIcon from "../assets/icons/Search";
 import BookCard from "../components/BookCard";
@@ -26,7 +26,7 @@ const MainPage: FC = () => {
     dispatch(BooksSlice.actions.updateSearchTerm(searchValue));
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 

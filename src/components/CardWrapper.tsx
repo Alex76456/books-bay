@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 type ICardWrapperProps = {
-  children: React.ReactNode | React.ReactNode[];
+  children: ReactNode | ReactNode[];
 };
 
 const CardWrapper: FC<ICardWrapperProps> = ({ children }) => {
