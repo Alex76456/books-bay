@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from "react";
-import { BooksSlice } from "../store/books/reducer";
+import { updateCart } from "../store/books/slice";
 import { getCart } from "../store/books/selectors";
 import { toggleCardsLocalStorage } from "../utils/toggleCardsLocalStorage";
 import { booksAPI } from "../services/api.service";
@@ -19,7 +19,7 @@ const useCart = (_id: string, book: BookCardType | undefined) => {
     if (book) {
       toggleCardsLocalStorage(book, localStorageKeys.CART);
       dispatch(
-        BooksSlice.actions.updateCart(
+        updateCart(
           JSON.parse(localStorage.getItem(localStorageKeys.CART) || "[]")
         )
       );

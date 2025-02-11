@@ -7,7 +7,7 @@ import Loader from "../components/Loader";
 import { booksAPI } from "../services/api.service";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { getCurSearchTerm } from "../store/books/selectors";
-import { BooksSlice } from "../store/books/reducer";
+import { updateSearchTerm } from "../store/books/slice";
 
 const MainPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ const MainPage: FC = () => {
   } = booksAPI.useFetchAllBooksQuery(searchTerm);
 
   const serchSubmit = () => {
-    dispatch(BooksSlice.actions.updateSearchTerm(searchValue));
+    dispatch(updateSearchTerm(searchValue));
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

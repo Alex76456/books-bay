@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { BooksSlice } from "./books/reducer";
+import { BooksSlice } from "./books/slice";
 import { booksAPI } from "../services/api.service";
 
 const rootReducer = combineReducers({

@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from "react";
-import { BooksSlice } from "../store/books/reducer";
+import { updateFavourites } from "../store/books/slice";
 import { getFavouites } from "../store/books/selectors";
 import { toggleCardsLocalStorage } from "../utils/toggleCardsLocalStorage";
 import { booksAPI } from "../services/api.service";
@@ -20,7 +20,7 @@ const useFavourites = (_id: string, book: BookCardType | undefined) => {
     if (book) {
       toggleCardsLocalStorage(book, localStorageKeys.FAVOURITES);
       dispatch(
-        BooksSlice.actions.updateFavourites(
+        updateFavourites(
           JSON.parse(localStorage.getItem(localStorageKeys.FAVOURITES) || "[]")
         )
       );

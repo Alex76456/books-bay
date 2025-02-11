@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { StateType } from "./../../types/stateType";
+import { StateType } from "../../types/stateType";
 import { BookCardType } from "../../types/bookCardType";
 import { localStorageKeys } from "../../constants/localStorageKeys";
 
@@ -34,4 +34,5 @@ export const BooksSlice = createSlice({
   },
 });
 
-export const { updateFavourites, updateCart } = BooksSlice.actions;
+export const { updateFavourites, updateCart, updateSearchTerm } =
+  BooksSlice.actions;
