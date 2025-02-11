@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import useCart from "../hooks/useCart";
 import useFavourites from "../hooks/useFavourites";
@@ -6,7 +6,12 @@ import NavigateWrapper from "./NavigateWrapper";
 import { booksAPI } from "../services/api.service";
 import { BookCardType } from "../types/bookCardType";
 
-const BookCartCard = ({ _id, book }: { _id: string; book: BookCardType }) => {
+type IBookCartCardProps = {
+  _id: string;
+  book: BookCardType;
+};
+
+const BookCartCard: FC<IBookCartCardProps> = ({ _id, book }) => {
   const { toggleCartButton } = useCart(_id, book);
   const { isFavourite, toggleFavouritesButton } = useFavourites(_id, book);
 

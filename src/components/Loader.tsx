@@ -1,6 +1,6 @@
-import * as React from "react";
+import { FC } from "react";
 
-const Loader = () => {
+const Loader: FC = () => {
   return (
     <ul className="loader">
       <li className="loader_item"></li>

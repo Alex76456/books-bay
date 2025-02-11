@@ -1,10 +1,10 @@
-import * as React from "react";
+import { FC } from "react";
 
-const CardWrapper = ({
-  children,
-}: {
+type ICardWrapperProps = {
   children: React.ReactNode | React.ReactNode[];
-}) => {
+};
+
+const CardWrapper: FC<ICardWrapperProps> = ({ children }) => {
   return <div className="flex flex-wrap justify-center">{children}</div>;
 };
 

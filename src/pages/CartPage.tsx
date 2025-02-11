@@ -1,11 +1,11 @@
-import * as React from "react";
+import { FC, useState } from "react";
 import BookCartCard from "../components/BookCartCard";
 import { getCart } from "../store/books/selectors";
 import { useAppSelector } from "../hooks/redux";
 
-const CartPage = () => {
+const CartPage: FC = () => {
   const cart = useAppSelector(getCart());
-  const [isVisible, setIsVisible] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div>

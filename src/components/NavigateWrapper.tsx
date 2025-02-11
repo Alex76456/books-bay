@@ -1,13 +1,12 @@
-import * as React from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-const NavigateWrapper = ({
-  children,
-  path,
-}: {
+type INavigateWrapperProps = {
   children: React.ReactNode | React.ReactNode[];
   path: string;
-}) => {
+};
+
+const NavigateWrapper: FC<INavigateWrapperProps> = ({ children, path }) => {
   const navigate = useNavigate();
 
   // console.log("path", path);

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 import { useParams } from "react-router-dom";
 import useFavourites from "../hooks/useFavourites";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
@@ -8,7 +8,7 @@ import { booksAPI } from "../services/api.service";
 import { useAppSelector } from "../hooks/redux";
 import { getCurSearchTerm } from "../store/books/selectors";
 
-const BookInfoPage = () => {
+const BookInfoPage: FC = () => {
   const params = useParams();
 
   const searchTerm = useAppSelector(getCurSearchTerm());

@@ -1,12 +1,11 @@
-import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { FC } from "react";
 import CartIcon from "../assets/icons/CartIcon";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import NavigateWrapper from "./NavigateWrapper";
 import { getCart, getFavouites } from "../store/books/selectors";
 import { useAppSelector } from "../hooks/redux";
 
-const Menu = () => {
+const Menu: FC = () => {
   const favourites = useAppSelector(getFavouites());
   const cart = useAppSelector(getCart());
 

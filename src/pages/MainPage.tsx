@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, useState } from "react";
 
 import SearchIcon from "../assets/icons/Search";
 import BookCard from "../components/BookCard";
@@ -9,12 +9,12 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { getCurSearchTerm } from "../store/books/selectors";
 import { BooksSlice } from "../store/books/reducer";
 
-const MainPage = () => {
+const MainPage: FC = () => {
   const dispatch = useAppDispatch();
 
   const searchTerm = useAppSelector(getCurSearchTerm());
 
-  const [searchValue, setSearchValue] = React.useState(searchTerm);
+  const [searchValue, setSearchValue] = useState(searchTerm);
 
   const {
     data: books,

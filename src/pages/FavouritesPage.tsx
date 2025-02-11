@@ -2,8 +2,9 @@ import BookCard from "../components/BookCard";
 import CardWrapper from "../components/CardWrapper";
 import { getFavouites } from "../store/books/selectors";
 import { useAppSelector } from "../hooks/redux";
+import { FC } from "react";
 
-const FavouritesPage = () => {
+const FavouritesPage: FC = () => {
   const favourites = useAppSelector(getFavouites());
 
   return (

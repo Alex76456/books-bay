@@ -1,6 +1,6 @@
-import * as React from "react";
+import { FC } from "react";
 
-const Footer = () => {
+const Footer: FC = () => {
   return (
     <div className="h-[55px] mt-2 mb-0 flex justify-center items-center bg-sky-300">
       Aleksey © 2023

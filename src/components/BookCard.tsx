@@ -1,3 +1,4 @@
+import { FC } from "react";
 import CartIcon from "../assets/icons/CartIcon";
 import FavouriteIcon from "../assets/icons/FavouriteIcon";
 import useCart from "../hooks/useCart";
@@ -8,7 +9,9 @@ import { useAppSelector } from "../hooks/redux";
 import { RootState } from "../store/store";
 import { BookCardType } from "../types/bookCardType";
 
-const BookCard = ({ _id, book }: { _id: string; book: BookCardType }) => {
+type IBookCardProps = { _id: string; book: BookCardType };
+
+const BookCard: FC<IBookCardProps> = ({ _id, book }) => {
   const { toggleCartButton, isInCart } = useCart(_id, book);
   const { isFavourite, toggleFavouritesButton } = useFavourites(_id, book);
 
